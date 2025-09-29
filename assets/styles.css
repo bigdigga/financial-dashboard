@@ -1,0 +1,196 @@
+/* ===========================
+   FinVista Pro – Global Styles
+   =========================== */
+
+/* ---------- Theme variables ---------- */
+:root {
+  --border: #e5e7eb;        /* gray-200 */
+  --border-dark: #334155;    /* slate-700 */
+  --bg: #ffffff;
+  --bg-dark: #0f172a;        /* slate-900 */
+  --panel: #ffffff;
+  --panel-dark: #1e293b;     /* slate-800 */
+  --text: #111827;           /* gray-900 */
+  --text-muted: #6b7280;     /* gray-500 */
+  --text-dark: #e5e7eb;      /* gray-200 */
+  --primary: #6366f1;        /* indigo-500 */
+}
+
+/* ---------- Base ---------- */
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  background: var(--bg);
+  color: var(--text);
+}
+.dark body {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+/* Make Plotly graphs fill containers nicely */
+.js-plotly-plot,
+.plotly,
+.plot-container {
+  width: 100% !important;
+}
+
+/* In dark mode, match panel color behind the SVG */
+.dark .js-plotly-plot .plotly .main-svg {
+  background: var(--panel-dark);
+}
+
+/* ===========================
+   Dash Controls (Dropdown / DatePicker)
+   =========================== */
+
+/* react-select (dcc.Dropdown) */
+.Select { font-size: 0.95rem; }
+.Select-control {
+  border-radius: 0.5rem;      /* rounded-lg */
+  border: 1px solid var(--border);
+  box-shadow: none !important;
+  min-height: 42px;
+}
+.Select-menu-outer {
+  border: 1px solid var(--border);
+  border-top: 0;
+  box-shadow: 0 10px 20px rgba(0,0,0,.05);
+}
+.Select-option { padding: 10px 12px; }
+.Select-option.is-focused {
+  background: rgba(99, 102, 241, 0.08); /* primary @ 8% */
+}
+.Select-placeholder,
+.Select--single > .Select-control .Select-value .Select-value-label {
+  color: #64748b; /* slate-500 */
+}
+.Select--single > .Select-control .Select-value,
+.Select--multi .Select-value {
+  color: var(--text);
+}
+
+/* Dropdown – dark mode */
+.dark .Select-control {
+  background: var(--panel-dark);
+  border: 1px solid var(--border-dark);
+}
+.dark .Select-menu-outer {
+  background: var(--panel-dark);
+  border: 1px solid var(--border-dark);
+}
+.dark .Select-option { color: var(--text-dark); }
+.dark .Select-placeholder,
+.dark .Select--single > .Select-control .Select-value .Select-value-label {
+  color: #cbd5e1; /* slate-300 */
+}
+
+/* react-dates (dcc.DatePickerRange / SingleDatePicker) */
+.DateRangePicker,
+.SingleDatePicker { width: 100%; }
+.DateRangePickerInput {
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+.DateInput_input {
+  font-size: 0.95rem;
+  padding: 10px 12px;
+  color: var(--text);
+}
+.DateInput { width: 48%; }
+.DateRangePickerInput_arrow_svg { fill: #94a3b8; } /* slate-400 */
+
+/* DatePicker – dark mode */
+.dark .DateRangePickerInput {
+  background: var(--panel-dark);
+  border: 1px solid var(--border-dark);
+}
+.dark .DateInput_input {
+  background: var(--panel-dark);
+  color: var(--text-dark);
+}
+
+/* Focus ring polish (Dropdown / DatePicker) */
+.Select-control:hover,
+.DateRangePickerInput:hover {
+  border-color: #a5b4fc; /* indigo-300 */
+}
+.is-focused:not(.is-open) > .Select-control,
+.DateRangePickerInput__withBorder:focus,
+.DateInput_input__focused {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, .25) !important;
+}
+
+/* Optional: checklist row spacing if you add checklists later */
+#sma {
+  display: flex;
+  gap: .75rem;
+  align-items: center;
+}
+#sma label { display: inline-flex; gap: .35rem; align-items: center; }
+
+/* ===========================
+   Plotly / Modebar / Spinner
+   =========================== */
+
+/* Transparent toolbar, no shadow/border */
+.js-plotly-plot .modebar {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+/* Default icon color (slate) */
+.js-plotly-plot .modebar-btn svg path,
+.js-plotly-plot .modebar-btn svg polygon,
+.js-plotly-plot .modebar-btn svg rect {
+  fill: #94a3b8 !important;   /* slate-400 */
+  stroke: #94a3b8 !important; /* some icons use stroke */
+}
+
+/* Hover/active = theme purple */
+.js-plotly-plot .modebar-btn:hover svg path,
+.js-plotly-plot .modebar-btn:hover svg polygon,
+.js-plotly-plot .modebar-btn:hover svg rect,
+.js-plotly-plot .modebar-btn.active svg path,
+.js-plotly-plot .modebar-btn.active svg polygon,
+.js-plotly-plot .modebar-btn.active svg rect {
+  fill: var(--primary) !important;
+  stroke: var(--primary) !important;
+}
+.js-plotly-plot .modebar-btn:hover,
+.js-plotly-plot .modebar-btn.active {
+  background: rgba(99, 102, 241, 0.12) !important; /* subtle purple hover */
+}
+
+/* Dash loading spinner color */
+._dash-loading::before {
+  color: var(--primary);
+}
+
+/* Style the unified-hover vertical guide line */
+.hoverlayer .hoverline {
+  stroke: #8b9cfb !important;     /* soft purple */
+  stroke-width: 1.25px !important;
+  stroke-dasharray: 2 2 !important; /* dotted */
+}
+/* Force Plotly chart background to match the dark panel */
+.dark .js-plotly-plot .main-svg,
+.dark .js-plotly-plot .plotly .main-svg {
+  background-color: #1e293b !important;  /* dark-800 */
+}
+
+/* Also ensure the cartesian plot area uses the same color */
+.dark .js-plotly-plot .cartesianlayer .bg,
+.dark .js-plotly-plot .plot_bg {
+  fill: #1e293b !important;
+}
+
+/* Keep the unified-hover guide line subtle in dark mode */
+.hoverlayer .hoverline {
+  stroke: #8b9cfb !important;
+  stroke-width: 1.25px !important;
+  stroke-dasharray: 2 2 !important;
+}
